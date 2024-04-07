@@ -2,7 +2,7 @@ export const routes = [
   {
     id: 1,
     name: "Reporting Pages",
-    path: "/",
+    path: "/reporting",
   },
   {
     id: 1,
@@ -17,7 +17,15 @@ export const routes = [
   {
     id: 1,
     name: "Book Category",
-    path: "/reporting",
+    path: "/category",
+    submenu: [
+      {
+        id: 11,
+        parent_id: 1,
+        name: "book category",
+        path: "/category/[id]",
+      },
+    ],
   },
   {
     id: 1,

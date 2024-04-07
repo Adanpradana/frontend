@@ -4,22 +4,19 @@ import MainLayout from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import ListTables from "@/components/ListTables";
 import useGetDataApi from "@/hooks/useGetDataApi";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Book() {
-  const label = "book";
-  const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}`;
+export default function CategoryBooks() {
+  const label = "category";
+  const router = useRouter();
+  const { id } = router.query;
+  const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}/${id}`;
   const { data } = useGetDataApi(URL_API);
-  const columns = [
-    "No",
-    "Book Title",
-    "Author",
-    "Year",
-    "Quantity",
-    "Category",
-  ];
-  const rows = data.map((item, index) => ({
+  const columns = ["No", "Book Title", "Author", "Year", "Quantity"];
+  const rows = data?.books?.map((item, index) => ({
     id: item.id,
     dynamicRows: {
       no: index + 1,
@@ -27,9 +24,9 @@ export default function Book() {
       author: item.author,
       year: item.year,
       quantity: item.quantity,
-      category: item?.category?.category_name,
     },
   }));
+
   return (
     <MainLayout>
       <div className="container p-4 h-full">

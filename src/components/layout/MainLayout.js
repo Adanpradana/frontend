@@ -12,7 +12,7 @@ export default function MainLayout({ children }) {
           <div
             key={route.id}
             className={`bg-blue-500 ${
-              router.pathname === route.path && "bg-blue-600"
+              router.pathname.includes(route.path) && "bg-blue-600"
             } hover:bg-blue-600 rounded-md`}
           >
             <Link href={route.path}>

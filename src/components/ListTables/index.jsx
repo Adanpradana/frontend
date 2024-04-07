@@ -30,15 +30,26 @@ export default function ListTables({ columns, label, rows }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              {Object.entries(row.dynamicRows).map(([key, value]) => (
-                <TableCell key={key} className="font-medium">
-                  {value}
-                </TableCell>
-              ))}
+          {rows?.length === 0 ? (
+            <TableRow>
+              <TableCell
+                colSpan={columns.length}
+                className=" bg-red-50 text-center col-span-2"
+              >
+                no data found
+              </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            rows?.map((row) => (
+              <TableRow key={row.id}>
+                {Object.entries(row.dynamicRows).map(([key, value]) => (
+                  <TableCell key={key} className="font-medium">
+                    {value}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>

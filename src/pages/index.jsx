@@ -10,7 +10,7 @@ export default function Home() {
     <MainLayout>
       <div className="container p-4 bg-red-300 h-full">
         <Button className="bg-yellow-600" variant="outline">
-          Button
+          helllo
         </Button>
       </div>
     </MainLayout>

@@ -4,35 +4,27 @@ import MainLayout from "@/components/layout/MainLayout";
 import { Button } from "@/components/ui/button";
 import ListTables from "@/components/ListTables";
 import useGetDataApi from "@/hooks/useGetDataApi";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Student() {
-  const label = "student";
+export default function Category() {
+  const label = "category";
+  const router = useRouter();
+  const { id } = router.query;
   const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}`;
   const { data } = useGetDataApi(URL_API);
-  const columns = ["No", "Name", "Nim", "Email", "Status", "Actions"];
+  const columns = ["No", "Category", "Actions"];
   const rows = data.map((item, index) => ({
     id: item.id,
     dynamicRows: {
       no: index + 1,
-      name: item.name,
-      nim: item.nim,
-      email: item.email,
-      status: !item.is_active ? (
-        <div className="bg-red-200 rounded-2xl w-20">
-          <div className="text-center p-2 text-red-600">In Active</div>
-        </div>
-      ) : (
-        <div className="bg-green-200 rounded-2xl w-20">
-          <div className="text-center p-2 text-green-600">Active</div>
-        </div>
-      ),
+      category: item?.category_name,
       actions: (
-        <div className="flex space-x-1">
-          <Button>edit</Button>
-          <Button>delete</Button>
-        </div>
+        <Link href={`/category/${item.id}`}>
+          <Button>view books</Button>
+        </Link>
       ),
     },
   }));

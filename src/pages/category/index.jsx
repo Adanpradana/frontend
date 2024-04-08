@@ -14,7 +14,7 @@ export default function Category() {
   const router = useRouter();
   const { id } = router.query;
   const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}`;
-  const { data } = useGetDataApi(URL_API);
+  const { data, loading } = useGetDataApi(URL_API);
   const columns = ["No", "Category", "Actions"];
   const rows = data.map((item, index) => ({
     id: item.id,
@@ -31,7 +31,13 @@ export default function Category() {
   return (
     <MainLayout>
       <div className="container p-4 h-full">
-        <ListTables url={URL_API} columns={columns} label={label} rows={rows} />
+        <ListTables
+          url={URL_API}
+          columns={columns}
+          label={label}
+          rows={rows}
+          loading={loading}
+        />
       </div>
     </MainLayout>
   );

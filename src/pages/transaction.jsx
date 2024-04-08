@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 export default function Book() {
   const label = "transaction";
   const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}`;
-  const { data } = useGetDataApi(URL_API);
+  const { data, loading } = useGetDataApi(URL_API);
   const columns = [
     "No",
     "Student Name",
@@ -50,7 +50,13 @@ export default function Book() {
   return (
     <MainLayout>
       <div className="container p-4 h-full">
-        <ListTables url={URL_API} columns={columns} label={label} rows={rows} />
+        <ListTables
+          url={URL_API}
+          columns={columns}
+          label={label}
+          rows={rows}
+          loading={loading}
+        />
       </div>
     </MainLayout>
   );

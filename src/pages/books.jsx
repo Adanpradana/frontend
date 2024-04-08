@@ -1,7 +1,5 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import MainLayout from "@/components/layout/MainLayout";
-import { Button } from "@/components/ui/button";
 import ListTables from "@/components/ListTables";
 import useGetDataApi from "@/hooks/useGetDataApi";
 
@@ -10,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Book() {
   const label = "book";
   const URL_API = `${process.env.NEXT_PUBLIC_API_HOST}/${label}`;
-  const { data } = useGetDataApi(URL_API);
+  const { data, loading } = useGetDataApi(URL_API);
   const columns = [
     "No",
     "Book Title",
@@ -33,7 +31,13 @@ export default function Book() {
   return (
     <MainLayout>
       <div className="container p-4 h-full">
-        <ListTables url={URL_API} columns={columns} label={label} rows={rows} />
+        <ListTables
+          url={URL_API}
+          columns={columns}
+          label={label}
+          rows={rows}
+          loading={loading}
+        />
       </div>
     </MainLayout>
   );
